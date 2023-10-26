@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <locale.h>
 /* MAT LUCAS = 5793; Edmarcos = 5387; DAVI = 53668*/
 int main() {
@@ -8,6 +9,7 @@ int main() {
     FILE *file;
     int **matriz;
     int proximaDistancia;
+    int X = 5 + 7 + 9 + 3 + 5 + 3 + 8 + 7 + 5 + 3 + 6 + 8;
 
     setlocale(LC_ALL, "en_US.utf8");
 
@@ -17,18 +19,20 @@ int main() {
 
     scanf("%d", &mode);
 
+    clock_t inicio = clock();
+
     if (mode == 1) {
     }
-    else if(mode ==2) {
+    else if (mode == 2) {
         file = fopen("tests/test.txt", "r");
         fscanf(file, "%d", &N);
 
-        if(N < 1){
-        printf("Tamanho invalido");
-        exit(1);
+        if (N < 1) {
+            printf("Tamanho invalido");
+            exit(1);
         }
 
-         if(file == NULL){
+        if (file == NULL) {
             printf("Falha ao iniciar o arquivo");
             exit(1);
         }
@@ -41,15 +45,14 @@ int main() {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (i == j){
+                if (i == j) {
                     matriz[i][j] = 0;
-                } else {
+                }
+                else {
                     fscanf(file, "%d", &proximaDistancia);
                     matriz[i][j] = proximaDistancia;
-               
+                }
             }
-        }
-
         }
 
         printf("Distâncias:\n");
@@ -60,10 +63,14 @@ int main() {
 
             printf("\n");
         }
-    printf("\n");
-}  else {
-    printf("Opcao invalida.");
-    exit(1);
-}
+        printf("\n");
+    }
+    else {
+        printf("Opcao invalida.");
+        exit(1);
+    }
+    clock_t fim = clock();
 
+    double tempoTot = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("%f", tempoTot);
 }
