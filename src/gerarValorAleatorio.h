@@ -1,0 +1,1 @@
+int gerarValorAleatorio(int minimo, int maximo);
