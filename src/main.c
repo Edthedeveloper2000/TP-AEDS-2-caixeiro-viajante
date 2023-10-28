@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <locale.h>
-/* MAT LUCAS = 5793; Edmarcos = 5387; DAVI = 53668*/
+#include "gerarValorAleatorio.h"
+/* MAT Lucas = 5793; Edmarcos = 5387; DAVI = 5368*/
+
+
 int main() {
     int N;
     int mode;
@@ -10,6 +13,8 @@ int main() {
     int **matriz;
     int proximaDistancia;
     int X = 5 + 7 + 9 + 3 + 5 + 3 + 8 + 7 + 5 + 3 + 6 + 8;
+    // X = 69
+    
 
     setlocale(LC_ALL, "en_US.utf8");
 
@@ -19,13 +24,46 @@ int main() {
 
     scanf("%d", &mode);
 
-    clock_t inicio = clock();
+    clock_t inicio, fim;
 
     if (mode == 1) {
+        
+        printf("Insira o N:\n");
+        scanf("%d" , &N);
+
+        X = X % N;
+        srand(time(NULL));
+        
+        matriz = (int **)malloc(N * sizeof(int *));
+
+        for (int i = 0; i < N; i++) {
+            matriz[i] = (int *)malloc(N * sizeof(int));
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (i == j) {
+                    matriz[i][j] = 0;
+                }
+                else {
+                    matriz[i][j] = gerarValorAleatorio(1, 99);
+                }
+            }
+        }
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < N; j++){
+                printf("%d\t", matriz[i][j]);
+            }
+
+        printf("\n");
+    }
+    
+    
     }
     else if (mode == 2) {
         file = fopen("tests/test.txt", "r");
         fscanf(file, "%d", &N);
+        X = X % N;
 
         if (N < 1) {
             printf("Tamanho invalido");
@@ -37,11 +75,14 @@ int main() {
             exit(1);
         }
 
+        
         matriz = (int **)malloc(N * sizeof(int *));
-
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
+        {
             matriz[i] = (int *)malloc(N * sizeof(int));
         }
+
+
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -69,8 +110,4 @@ int main() {
         printf("Opcao invalida.");
         exit(1);
     }
-    clock_t fim = clock();
-
-    double tempoTot = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("%f", tempoTot);
 }
