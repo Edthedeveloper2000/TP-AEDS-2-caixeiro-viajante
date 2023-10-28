@@ -3,6 +3,7 @@
 #include <time.h>
 #include <locale.h>
 #include "gerarValorAleatorio.h"
+#include "permutacao.h"
 /* MAT Lucas = 5793; Edmarcos = 5387; DAVI = 5368*/
 
 
@@ -23,8 +24,6 @@ int main() {
     printf("2 - Ler arquivo\n");
 
     scanf("%d", &mode);
-
-    clock_t inicio, fim;
 
     if (mode == 1) {
         
@@ -57,7 +56,6 @@ int main() {
 
         printf("\n");
     }
-    
     
     }
     else if (mode == 2) {
@@ -106,8 +104,34 @@ int main() {
         }
         printf("\n");
     }
+    
     else {
         printf("Opcao invalida.");
         exit(1);
     }
+    int tamanho = N -1;
+    int a[tamanho];
+    
+    int count = 0;
+
+    for (int i = 0; i < N; i++) {
+        if (i != X) {
+            a[count] = i;
+            count++;
+        }
+    }
+
+    clock_t start, end;
+    double cpu_time_used;
+
+    start = clock();
+
+    int totalPermutations = heapPermutation(a, tamanho, tamanho);
+
+    end = clock();
+
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    printf("O número total de permutações é: %d\n", totalPermutations);
+    printf("Tempo de execução: %f segundos\n", cpu_time_used);
 }
