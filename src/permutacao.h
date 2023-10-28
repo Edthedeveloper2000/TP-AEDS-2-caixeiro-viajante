@@ -1,0 +1,1 @@
+int heapPermutation(int a[], int size, int n);
