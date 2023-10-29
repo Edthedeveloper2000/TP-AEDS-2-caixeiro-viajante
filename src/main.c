@@ -110,6 +110,11 @@ int main() {
         printf("Opção inválida.");
         exit(1);
     }
+    clock_t start, end;
+    double cpu_time_used;
+    
+    start = clock();
+
     int tamanho = N -1;
     int a[tamanho];
     
@@ -122,11 +127,6 @@ int main() {
         }
     }
 
-    clock_t start, end;
-    double cpu_time_used;
-
-    start = clock();
-
     int maxPermutas = 1;
     for (int i = 1; i <= tamanho; ++i) {
         maxPermutas *= i;
@@ -136,11 +136,7 @@ int main() {
     int quantidadePermutas = 0;
     int totalPermutations = permutar(a, tamanho, tamanho, result, quantidadePermutas);
 
-    mostrarCombinacoes(result, totalPermutations,tamanho);
-
-    end = clock();
-
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    //mostrarCombinacoes(result, totalPermutations,tamanho);
 
     for (int i = 0; i < totalPermutations; i++) {
         free(result[i]);
@@ -151,6 +147,10 @@ int main() {
         free(matriz[i]);
     }
     free(matriz);
+
+    end = clock();
+
+     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
     printf("O número total de permutações é: %d\n", totalPermutations);
     printf("Tempo de execução: %f segundos\n", cpu_time_used);
