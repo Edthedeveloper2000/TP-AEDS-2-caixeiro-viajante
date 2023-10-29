@@ -1,0 +1,1 @@
+void menorCaminho(int **distancias, int **caminhos);
