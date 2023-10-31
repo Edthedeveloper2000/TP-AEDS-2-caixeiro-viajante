@@ -133,20 +133,7 @@ int main() {
         maxPermutas *= i;
     }
 
-    int **result = (int **)malloc(maxPermutas * sizeof(int *));
-    int quantidadePermutas = 0;
-    int totalPermutations = permutar(a, tamanho, tamanho, result, quantidadePermutas);
-
-    mostrarCombinacoes(result, totalPermutations,tamanho);
-
-    int menorDistancia =  menorCaminho(matriz, result, totalPermutations, tamanho);
-    
-    printf("\n----%d----\n", menorDistancia);
-
-    for (int i = 0; i < totalPermutations; i++) {
-        free(result[i]);
-    }
-    free(result);
+    int menorDistancia = permutar(a, tamanho, tamanho, X, matriz);
 
     for (int i = 0; i < N; i++) {
         free(matriz[i]);
@@ -155,8 +142,8 @@ int main() {
 
     end = clock();
 
-     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
-    printf("O número total de permutações é: %d\n", totalPermutations);
+    printf("A menor distancia é: %d\n", menorDistancia);
     printf("Tempo de execução: %f segundos\n", cpu_time_used);
 }
