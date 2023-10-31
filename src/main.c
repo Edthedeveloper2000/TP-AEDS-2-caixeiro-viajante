@@ -11,6 +11,7 @@ int main() {
     int N;
     int mode;
     FILE *file;
+    FILE *output;
     int **matriz;
     int proximaDistancia;
     int X = 5 + 7 + 9 + 3 + 5 + 3 + 8 + 7 + 5 + 3 + 6 + 8;
@@ -117,34 +118,86 @@ int main() {
     int * melhorCaminho  = (int *)malloc( tamanho * sizeof(int));
     int menorDistancia = permutar(a, tamanho, tamanho, X, matriz, melhorCaminho );
 
-    printf("Distâncias:\n");
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            printf("%d\t", matriz[i][j]);
+    end = clock();
+
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    printf("Como deseja receber o resultado?\n");
+    printf("1 - Pelo terminal\n");
+    printf("2 - Por arquivo\n");
+
+    mode = 0;
+
+    scanf("%d", &mode);
+
+    printf("%d", mode);
+
+    switch (mode) {
+    case 1:
+        printf("Distâncias:\n");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                printf("%d\t", matriz[i][j]);
+            }
+            printf("\n");
         }
+
         printf("\n");
+
+        printf("O melhor caminho é: ");
+        printf("%d -> ", X);
+
+        for(int i = 0; i<tamanho; i++){
+            printf("%d -> ", melhorCaminho[i]);
+        }
+
+        printf("%d", X);
+
+        printf("\n");
+
+        printf("Menor Distancia: %d\n", menorDistancia);
+        printf("Tempo de execução: %f segundos\n", cpu_time_used);
+        break;
+    case 2:
+        output = fopen("tests/output.txt", "w");
+        if(output == NULL){
+            printf("Falha ao acessar o arquivo de Saida");
+            return 1;
+        }
+
+        fprintf(output, "Distâncias:\n");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                fprintf(output, "%d\t", matriz[i][j]);
+            }
+            fprintf(output, "\n");
+        }
+
+        fprintf(output, "\n");
+
+        fprintf(output, "O melhor caminho é: ");
+        fprintf(output, "%d -> ", X);
+
+        for(int i = 0; i<tamanho; i++){
+            fprintf(output, "%d -> ", melhorCaminho[i]);
+        }
+        
+        fprintf(output, "%d", X);
+
+        fprintf(output, "\n");
+
+        fprintf(output, "Menor Distancia: %d \n", menorDistancia);
+        fprintf(output, "Tempo de execução: %f segundos\n", cpu_time_used);
+
+        fclose(output);
+        break;
+    default:
+        printf("Opção inválida\n");
+        break;
     }
-
-    printf("\n");
-
-    printf("O melhor caminho é: ");
-    printf("%d -> ", X);
-    for(int i = 0; i<tamanho; i++){
-       printf("%d -> ", melhorCaminho[i]);
-    }
-    printf("%d", X);
-
-    printf("\n");
 
     for (int i = 0; i < N; i++) {
         free(matriz[i]);
     }
     free(matriz);
-
-    end = clock();
-
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-    printf("A menor distancia é: %d\n", menorDistancia);
-    printf("Tempo de execução: %f segundos\n", cpu_time_used);
 }
