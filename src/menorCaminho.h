@@ -1,1 +1,1 @@
-void menorCaminho(int **distancias, int **caminhos);
+int menorCaminho(int **matriz, int **result, int totalPermutations, int N);
