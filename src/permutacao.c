@@ -20,22 +20,38 @@ void trocar(int *x, int *y) {
 }
 
 // Função para preencher o array de ponteiros com as combinações
-int permutar(int a[], int size, int n, int **result, int count) {
-    if (size == 1) {
-        result[count] = (int *)malloc(n * sizeof(int));
-        if (result[count] == NULL) {
-            printf("Erro de alocação de memória.\n");
-            exit(1);
-        }
-        for (int i = 0; i < n; i++) {
-            result[count][i] = a[i];
-        }
-        return count + 1;
-    }
-
+int permutar(int a[], int size, int n, int x, int **distancias) {
+    int menorDistancia = 0;
+    //int melhorTrajeto[n];
     for (int i = 0; i < size; i++) {
-        count = permutar(a, size - 1, n, result, count);
+        int distancia = 0;
+        permutar(a, size - 1, n, x, distancias);
+        distancia+= distancias[x][a[0]];
+        for(int k = 0; k < n; k++) {
+            if( k+1 < n) {
+                int cidadeA = a[k];
+                int cidadeB = a[k+1];
 
+                distancia+= distancias[cidadeA][cidadeB]; 
+            };
+
+             //printf("%d ", a[k]);
+        }
+        //printf("\n");
+
+        distancia+= distancias[a[n-1]][x];
+       // printf("%d", distancia);
+
+        //printf("\n");
+
+        if(i == 0) {
+            menorDistancia = distancia;
+        } else {
+            if(distancia < menorDistancia) {
+                menorDistancia = distancia;
+            }
+        }
+        
         if (size % 2 == 1) {
             trocar(&a[0], &a[size - 1]);
         } else {
@@ -43,5 +59,5 @@ int permutar(int a[], int size, int n, int **result, int count) {
         }
     }
 
-    return count;
+    return menorDistancia;
 }
