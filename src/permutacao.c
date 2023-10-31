@@ -20,12 +20,11 @@ void trocar(int *x, int *y) {
 }
 
 // Função para preencher o array de ponteiros com as combinações
-int permutar(int a[], int size, int n, int x, int **distancias) {
+int permutar(int a[], int size, int n, int x, int **distancias, int *melhorCaminho) {
     int menorDistancia = 0;
-    //int melhorTrajeto[n];
     for (int i = 0; i < size; i++) {
         int distancia = 0;
-        permutar(a, size - 1, n, x, distancias);
+        permutar(a, size - 1, n, x, distancias, melhorCaminho);
         distancia+= distancias[x][a[0]];
         for(int k = 0; k < n; k++) {
             if( k+1 < n) {
@@ -34,15 +33,10 @@ int permutar(int a[], int size, int n, int x, int **distancias) {
 
                 distancia+= distancias[cidadeA][cidadeB]; 
             };
-
-             //printf("%d ", a[k]);
+            melhorCaminho[k] = a[k];
         }
-        //printf("\n");
 
         distancia+= distancias[a[n-1]][x];
-       // printf("%d", distancia);
-
-        //printf("\n");
 
         if(i == 0) {
             menorDistancia = distancia;
