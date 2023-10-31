@@ -49,14 +49,6 @@ int main() {
                 }
             }
         }
-        for (int i = 0; i < N; i++){
-            for (int j = 0; j < N; j++){
-                printf("%d\t", matriz[i][j]);
-            }
-
-        printf("\n");
-    }
-    
     }
     else if (mode == 2) {
         file = fopen("tests/test.txt", "r");
@@ -93,16 +85,6 @@ int main() {
                 }
             }
         }
-
-        printf("Distâncias:\n");
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                printf("%d ", matriz[i][j]);
-            }
-
-            printf("\n");
-        }
-        printf("\n");
         fclose(file);
     }
     
@@ -132,7 +114,27 @@ int main() {
         maxPermutas *= i;
     }
 
-    int menorDistancia = permutar(a, tamanho, tamanho, X, matriz);
+    int * melhorCaminho  = (int *)malloc( tamanho * sizeof(int));
+    int menorDistancia = permutar(a, tamanho, tamanho, X, matriz, melhorCaminho );
+
+    printf("Distâncias:\n");
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%d\t", matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+
+    printf("O melhor caminho é: ");
+    printf("%d -> ", X);
+    for(int i = 0; i<tamanho; i++){
+       printf("%d -> ", melhorCaminho[i]);
+    }
+    printf("%d", X);
+
+    printf("\n");
 
     for (int i = 0; i < N; i++) {
         free(matriz[i]);
