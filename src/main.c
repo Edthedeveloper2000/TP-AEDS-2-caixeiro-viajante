@@ -4,7 +4,6 @@
 #include <locale.h>
 #include "gerarValorAleatorio.h"
 #include "permutacao.h"
-#include "menorCaminho.h"
 /* MAT Lucas = 5793; Edmarcos = 5387; DAVI = 5368*/
 
 
