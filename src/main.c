@@ -4,6 +4,7 @@
 #include <locale.h>
 #include "gerarValorAleatorio.h"
 #include "permutacao.h"
+#include "menorCaminho.h"
 /* MAT Lucas = 5793; Edmarcos = 5387; DAVI = 5368*/
 
 
@@ -136,7 +137,11 @@ int main() {
     int quantidadePermutas = 0;
     int totalPermutations = permutar(a, tamanho, tamanho, result, quantidadePermutas);
 
-    //mostrarCombinacoes(result, totalPermutations,tamanho);
+    mostrarCombinacoes(result, totalPermutations,tamanho);
+
+    int menorDistancia =  menorCaminho(matriz, result, totalPermutations, tamanho);
+    
+    printf("\n----%d----\n", menorDistancia);
 
     for (int i = 0; i < totalPermutations; i++) {
         free(result[i]);
