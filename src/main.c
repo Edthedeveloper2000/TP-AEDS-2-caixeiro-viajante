@@ -121,11 +121,9 @@ int main() {
 
     scanf("%d", &mode);
 
-    printf("%d", mode);
-
     switch (mode) {
     case 1:
-        printf("Distâncias:\n");
+        printf("\nDistâncias:\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 printf("%d\t", matriz[i][j]);
