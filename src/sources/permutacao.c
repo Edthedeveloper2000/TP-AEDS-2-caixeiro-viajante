@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "../headers/permutacao.h"
 // Função para trocar os valores de dois inteiros
 void trocar(int *x, int *y) {
     int temp = *x;

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <locale.h>
-#include "gerarValorAleatorio.h"
-#include "permutacao.h"
+#include "headers/gerarValorAleatorio.h"
+#include "headers/permutacao.h"
 #define somaMatriculas 69
 
 int main() {
