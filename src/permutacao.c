@@ -1,17 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Função para imprimir as combinações
-void mostrarCombinacoes(int **result, int count, int n) {
-    printf("Todas as combinações:\n");
-    for (int i = 0; i < count; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%d ", result[i][j]);
-        }
-        printf("\n");
-    }
-}
-
 // Função para trocar os valores de dois inteiros
 void trocar(int *x, int *y) {
     int temp = *x;
