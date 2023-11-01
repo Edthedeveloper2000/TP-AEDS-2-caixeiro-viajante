@@ -104,12 +104,6 @@ int main() {
             count++;
         }
     }
-
-    int maxPermutas = 1;
-    for (int i = 1; i <= tamanho; ++i) {
-        maxPermutas *= i;
-    }
-
     int * melhorCaminho  = (int *)malloc( tamanho * sizeof(int));
     int menorDistancia = permutar(a, tamanho, tamanho, X, matriz, melhorCaminho );
 
@@ -152,7 +146,7 @@ int main() {
         printf("Tempo de execução: %f segundos\n", cpu_time_used);
         break;
     case 2:
-        output = fopen("src/tests/output.txt", "w");
+        output = fopen("tests/output.txt", "w");
         if(output == NULL){
             printf("Falha ao acessar o arquivo de Saida");
             return 1;
