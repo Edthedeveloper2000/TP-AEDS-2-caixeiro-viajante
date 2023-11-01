@@ -27,8 +27,6 @@ int main() {
         case 1:
             printf("Insira o N:\n");
             scanf("%d", &N);
-
-            X = somaMatriculas % N;
             srand(time(NULL));
 
             matriz = (int **)malloc(N * sizeof(int *));
@@ -50,7 +48,6 @@ int main() {
         case 2:
             file = fopen("tests/test.txt", "r");
             fscanf(file, "%d", &N);
-            X = X % N;
 
             if (N < 1) {
                 printf("Tamanho inválido");
@@ -87,7 +84,7 @@ int main() {
     }
     clock_t start, end;
     double cpu_time_used;
-    
+    X = somaMatriculas % N;
     start = clock();
 
     printf("Gerando resposta. Isso pode demorar um pouco...\n");
@@ -184,6 +181,8 @@ int main() {
         fprintf(output, "Tempo de execução: %f segundos\n", cpu_time_used);
 
         fclose(output);
+
+        printf("\nArquivo gerado com sucesso.\n");
         break;
     default:
         printf("Opção inválida\n");
