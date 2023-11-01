@@ -4,8 +4,7 @@
 #include <locale.h>
 #include "gerarValorAleatorio.h"
 #include "permutacao.h"
-/* MAT Lucas = 5793; Edmarcos = 5387; DAVI = 5368*/
-
+#define somaMatriculas 69
 
 int main() {
     int N;
@@ -14,9 +13,7 @@ int main() {
     FILE *output;
     int **matriz;
     int proximaDistancia;
-    int X = 5 + 7 + 9 + 3 + 5 + 3 + 8 + 7 + 5 + 3 + 6 + 8;
-    // X = 69
-    
+    int X;
 
     setlocale(LC_ALL, "en_US.utf8");
 
@@ -26,72 +23,67 @@ int main() {
 
     scanf("%d", &mode);
 
-    if (mode == 1) {
-        
-        printf("Insira o N:\n");
-        scanf("%d" , &N);
+    switch (mode) {
+        case 1:
+            printf("Insira o N:\n");
+            scanf("%d", &N);
 
-        X = X % N;
-        srand(time(NULL));
-        
-        matriz = (int **)malloc(N * sizeof(int *));
+            X = somaMatriculas % N;
+            srand(time(NULL));
 
-        for (int i = 0; i < N; i++) {
-            matriz[i] = (int *)malloc(N * sizeof(int));
-        }
+            matriz = (int **)malloc(N * sizeof(int *));
+            for (int i = 0; i < N; i++) {
+                matriz[i] = (int *)malloc(N * sizeof(int));
+            }
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (i == j) {
-                    matriz[i][j] = 0;
-                }
-                else {
-                    matriz[i][j] = gerarValorAleatorio(1, 99);
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (i == j) {
+                        matriz[i][j] = 0;
+                    } else {
+                        matriz[i][j] = gerarValorAleatorio(1, 99);
+                    }
                 }
             }
-        }
-    }
-    else if (mode == 2) {
-        file = fopen("tests/test.txt", "r");
-        fscanf(file, "%d", &N);
-        X = X % N;
+            break;
 
-        if (N < 1) {
-            printf("Tamanho invalido");
-            exit(1);
-        }
+        case 2:
+            file = fopen("tests/test.txt", "r");
+            fscanf(file, "%d", &N);
+            X = X % N;
 
-        if (file == NULL) {
-            printf("Falha ao iniciar o arquivo");
-            exit(1);
-        }
+            if (N < 1) {
+                printf("Tamanho inválido");
+                exit(1);
+            }
 
-        
-        matriz = (int **)malloc(N * sizeof(int *));
-        for (int i = 0; i < N; i++)
-        {
-            matriz[i] = (int *)malloc(N * sizeof(int));
-        }
+            if (file == NULL) {
+                printf("Falha ao iniciar o arquivo");
+                exit(1);
+            }
 
+            matriz = (int **)malloc(N * sizeof(int *));
+            for (int i = 0; i < N; i++) {
+                matriz[i] = (int *)malloc(N * sizeof(int));
+            }
 
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (i == j) {
-                    matriz[i][j] = 0;
-                }
-                else {
-                    fscanf(file, "%d", &proximaDistancia);
-                    matriz[i][j] = proximaDistancia;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (i == j) {
+                        matriz[i][j] = 0;
+                    } else {
+                        fscanf(file, "%d", &proximaDistancia);
+                        matriz[i][j] = proximaDistancia;
+                    }
                 }
             }
-        }
-        fclose(file);
-    }
-    
-    else {
+            fclose(file);
+            break;
+
+        default:
         printf("Opção inválida.");
-        exit(1);
+            exit(1);
+            break;
     }
     clock_t start, end;
     double cpu_time_used;
