@@ -90,6 +90,8 @@ int main() {
     
     start = clock();
 
+    printf("Gerando resposta. Isso pode demorar um pouco...\n");
+
     int tamanho = N -1;
     int a[tamanho];
     
