@@ -46,16 +46,21 @@ int main() {
             break;
 
         case 2:
-            file = fopen("tests/test.txt", "r");
+            char file_path[250]; // Defina o tamanho máximo do caminho do arquivo
+
+            printf("Insira o caminho do arquivo: ");
+            scanf("%s", file_path);
+
+            file = fopen(file_path, "r");
+            if (file == NULL) {
+                printf("Falha ao abrir o arquivo");
+                exit(1);
+            }
+
             fscanf(file, "%d", &N);
 
             if (N < 1) {
                 printf("Tamanho inválido");
-                exit(1);
-            }
-
-            if (file == NULL) {
-                printf("Falha ao iniciar o arquivo");
                 exit(1);
             }
 
@@ -76,7 +81,6 @@ int main() {
             }
             fclose(file);
             break;
-
         default:
         printf("Opção inválida.");
             exit(1);
@@ -148,7 +152,7 @@ int main() {
         printf("Tempo de execução: %f segundos\n", cpu_time_used);
         break;
     case 2:
-        output = fopen("tests/output.txt", "w");
+        output = fopen("src/tests/output.txt", "w");
         if(output == NULL){
             printf("Falha ao acessar o arquivo de Saida");
             return 1;
