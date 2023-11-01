@@ -8,7 +8,7 @@
 
 int main() {
     int N;
-    int mode;
+    int mode = 0;
     FILE *file;
     FILE *output;
     int **matriz;
