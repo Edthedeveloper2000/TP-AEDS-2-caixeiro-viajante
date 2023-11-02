@@ -14,6 +14,7 @@ int main() {
     int **matriz;
     int proximaDistancia;
     int X;
+    char file_path[250];
 
     setlocale(LC_ALL, "en_US.utf8");
 
@@ -29,11 +30,13 @@ int main() {
             scanf("%d", &N);
             srand(time(NULL));
 
+            // Gera a matriz de distancias dinamicamente
             matriz = (int **)malloc(N * sizeof(int *));
             for (int i = 0; i < N; i++) {
                 matriz[i] = (int *)malloc(N * sizeof(int));
             }
 
+            // Monsta a matriz N x N com zeros nas diagonais
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (i == j) {
@@ -46,8 +49,6 @@ int main() {
             break;
 
         case 2:
-            char file_path[250]; // Defina o tamanho máximo do caminho do arquivo
-
             printf("Insira o caminho do arquivo: ");
             scanf("%s", file_path);
 
@@ -64,11 +65,13 @@ int main() {
                 exit(1);
             }
 
+            // Gera a matriz de distancias dinamicamente
             matriz = (int **)malloc(N * sizeof(int *));
             for (int i = 0; i < N; i++) {
                 matriz[i] = (int *)malloc(N * sizeof(int));
             }
 
+            // Monsta a matriz N x N com zeros nas diagonais
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (i == j) {
@@ -98,6 +101,7 @@ int main() {
     
     int count = 0;
 
+    // Gera lista de cidades de 0 a N
     for (int i = 0; i < N; i++) {
         if (i != X) {
             a[count] = i;
@@ -109,6 +113,7 @@ int main() {
 
     end = clock();
 
+    // Calcula tempo de execução
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
     printf("Como deseja receber o resultado?\n");
@@ -121,6 +126,7 @@ int main() {
 
     switch (mode) {
     case 1:
+        // Exibe a matriz das distâncias
         printf("\nDistâncias:\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -152,6 +158,7 @@ int main() {
             return 1;
         }
 
+        // Escreve a matriz das distancias no arquivo
         fprintf(output, "Distâncias:\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -165,6 +172,7 @@ int main() {
         fprintf(output, "O melhor caminho é: ");
         fprintf(output, "%d -> ", X);
 
+        // Escreve o menor caminho no arquivo
         for(int i = 0; i<tamanho; i++){
             fprintf(output, "%d -> ", melhorCaminho[i]);
         }
