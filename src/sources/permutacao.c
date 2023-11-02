@@ -10,19 +10,19 @@ void trocar(int *x, int *y) {
 }
 
 // realiza a permutação dos n elementos de um dado vetor e retorna a menor distancia possivel
-int permutar(int a[], int size, int n, int x, int **distancias, int *melhorCaminho) {
+int obterMenorDistancia(int a[], int tamanho, int n, int x, int **distancias, int *melhorCaminho) {
     int menorDistancia = 0;
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < tamanho; i++) {
         int distancia = 0;
 
         /**
-         * Chama a propria função recursivamente com size -1. Assim cada repetição 
+         * Chama a propria função recursivamente com tamanho -1. Assim cada repetição 
          * será sempre uma unidade menor que a outra, com o número total de repeticões
-         * no final sendo: size x size-1 x size-2 x ... x 1 = size! 
-         * Se size =5, 5!=120 permutações
+         * no final sendo: tamanho x tamanho-1 x tamanho-2 x ... x 1 = tamanho! 
+         * Se tamanho = 5, 5!=120 permutações
         */
-        permutar(a, size - 1, n, x, distancias, melhorCaminho);
+        obterMenorDistancia(a, tamanho - 1, n, x, distancias, melhorCaminho);
 
         // Distancia de X até o primeiro elemento da permutação
         distancia+= distancias[x][a[0]];
@@ -49,10 +49,10 @@ int permutar(int a[], int size, int n, int x, int **distancias, int *melhorCamin
         }
         
         // Realiza a permutação entre dois elementos, gerando uma nova combinação
-        if (size % 2 == 1) {
-            trocar(&a[0], &a[size - 1]);
+        if (tamanho % 2 == 1) {
+            trocar(&a[0], &a[tamanho - 1]);
         } else {
-            trocar(&a[i], &a[size - 1]);
+            trocar(&a[i], &a[tamanho - 1]);
         }
     }
 

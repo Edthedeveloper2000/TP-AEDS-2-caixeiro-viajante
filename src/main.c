@@ -109,7 +109,7 @@ int main() {
         }
     }
     int * melhorCaminho  = (int *)malloc( tamanho * sizeof(int));
-    int menorDistancia = permutar(a, tamanho, tamanho, X, matriz, melhorCaminho );
+    int menorDistancia = obterMenorDistancia(a, tamanho, tamanho, X, matriz, melhorCaminho );
 
     end = clock();
 

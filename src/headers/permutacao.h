@@ -1,1 +1,1 @@
-int permutar(int a[], int size, int n, int x, int** distancias, int* melhorCaminho);
+int obterMenorDistancia(int a[], int tamanho, int n, int x, int** distancias, int* melhorCaminho);
